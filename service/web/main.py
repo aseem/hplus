@@ -45,7 +45,13 @@ def index():
 		form.name.data = ''
 		return redirect(url_for('index')) # Post/Redirect/Get Pattern
 
-	return render_template('index.html', current_time=datetime.utcnow(), form=form, name=session.get('name'))
+    # get top stories
+    stories = mongo.db.top_100.find({'rank': 1})
+	return render_template('index.html', 
+        current_time=datetime.utcnow(), 
+        form=form, 
+        name=session.get('name'), 
+        stories=stories)
 
 
 @app.route('/user/<name>')

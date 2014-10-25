@@ -10,4 +10,9 @@
 	<p>That was {{ moment(current_time).fromNow(refresh=True) }}</p>
 </div>
 {{ wtf.quick_form(form) }}
+<div>
+    {% for story in stories %}
+        <p>{{ story.rank }}. <a href={{ story.url }}>{{ story.title }}</a></p>
+    {% endfor %}
+</div>
 {% endblock %}
