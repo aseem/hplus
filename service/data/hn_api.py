@@ -1,6 +1,5 @@
 import pymongo
 from firebase import firebase
-import threading
 import logging
 import time
 from datetime import datetime
