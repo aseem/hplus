@@ -6,14 +6,16 @@ from flask.ext.wtf import Form
 from wtforms import StringField, SubmitField
 from wtforms.validators import Required
 from datetime import datetime
+from flask.ext.pymongo import PyMongo
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hard to guess string'
+app.config['MONGO_DBNAME'] = 'hacker_news_test'
 
 manager = Manager(app)
 bootstrap = Bootstrap(app)
 moment = Moment(app)
-
+mongo = PyMongo(app)
 
 # Forms
 class NameForm(Form):
@@ -36,18 +38,18 @@ def internal_server_error(e):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-	form = NameForm()
-	if form.validate_on_submit():
-		old_name = session.get('name')
-		if old_name is not None and old_name != form.name.data:
-			flash('Looks like you have changed your name!')
-		session['name'] = form.name.data
-		form.name.data = ''
-		return redirect(url_for('index')) # Post/Redirect/Get Pattern
+    form = NameForm()
+    if form.validate_on_submit():
+        old_name = session.get('name')
+        if old_name is not None and old_name != form.name.data:
+            flash('Looks like you have changed your name!')
+        session['name'] = form.name.data
+        form.name.data = ''
+        return redirect(url_for('index')) # Post/Redirect/Get Pattern
 
     # get top stories
-    stories = mongo.db.top_100.find({'rank': 1})
-	return render_template('index.html', 
+    stories = mongo.db.top_100.find().sort('rank', 1)
+    return render_template('index.html', 
         current_time=datetime.utcnow(), 
         form=form, 
         name=session.get('name'), 
