@@ -7,6 +7,8 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import Required
 from datetime import datetime
 from flask.ext.pymongo import PyMongo
+from bson import json_util
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hard to guess string'
@@ -55,6 +57,12 @@ def index():
         name=session.get('name'), 
         stories=stories)
 
+
+@app.route('/api/1.0/hn')
+def get_hn():
+    stories = mongo.db.top_100.find().sort('rank', 1)
+    return json_util.dumps(stories, default=json_util.default)
+    
 
 @app.route('/user/<name>')
 def user(name):
