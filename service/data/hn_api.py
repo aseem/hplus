@@ -21,7 +21,7 @@ def get_top_100(api, collection, logging):
             continue
 
         if (not story):
-             logging.error('Encountered error, skipping story')
+            logging.error('Encountered error, skipping story')
             continue
 
         # add to Top 100 collection
