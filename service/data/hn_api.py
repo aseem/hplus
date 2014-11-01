@@ -17,10 +17,12 @@ def get_top_100(api, collection, logging):
         try:
             story = api.get('item', story_id)
         except:
-            #print "Encountered error, skipping story"
+            logging.error('Encountered error, skipping story')
             continue
 
-        #print "Processing Story - Rank: %s  - ID: %d" % (index, story_id)
+        if (not story):
+             logging.error('Encountered error, skipping story')
+            continue
 
         # add to Top 100 collection
         try:
