@@ -3,6 +3,7 @@ from firebase import firebase
 import logging
 import time
 from datetime import datetime
+import sys
 
 # get top 100 stories on HN
 def get_top_100(api, collection, logging):
@@ -10,14 +11,20 @@ def get_top_100(api, collection, logging):
     # clear out the collection
     collection.remove(None, safe=True)
 
-    top_stories =api.get('topstories', None);
-    #print top_stories
+    try:
+        top_stories =api.get('topstories', None);
+    except:
+        logging.error('Encountered error get HN top 100')
+        e = sys.exc_info()[0]
+        logging.error("Exception: %s" % e)
 
     for index, story_id in enumerate(top_stories):
         try:
             story = api.get('item', story_id)
         except:
             logging.error('Encountered error, skipping story')
+            e = sys.exc_info()[0]
+            logging.error("Exception: %s" % e)
             continue
 
         if (not story):
@@ -42,9 +49,10 @@ def get_top_100(api, collection, logging):
                 safe=True
             )
             #print index+1
-        except pymongo.errors.DuplicateKeyError, e:
+        except:
             logging.error('Encountered error, skipping story')
-
+            e = sys.exc_info()[0]
+            logging.error("Exception: %s" % e)
 
 def update_top_100(collection, collection_refresh, logging):
     #clear out current top 100
