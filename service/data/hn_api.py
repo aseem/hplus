@@ -3,6 +3,7 @@ from firebase import firebase
 import logging
 import time
 from datetime import datetime
+import sys
 
 # get top 100 stories on HN
 def get_top_100(api, collection, logging):
@@ -10,17 +11,26 @@ def get_top_100(api, collection, logging):
     # clear out the collection
     collection.remove(None, safe=True)
 
-    top_stories =api.get('topstories', None);
-    #print top_stories
+    try:
+        top_stories =api.get('topstories', None);
+    except:
+        logging.error('Encountered error get HN top 100')
+        e = sys.exc_info()[0]
+        logging.error("Exception: %s" % e)
+        return False
 
     for index, story_id in enumerate(top_stories):
         try:
             story = api.get('item', story_id)
         except:
-            #print "Encountered error, skipping story"
+            logging.error('Encountered error, skipping story')
+            e = sys.exc_info()[0]
+            logging.error("Exception: %s" % e)
             continue
 
-        #print "Processing Story - Rank: %s  - ID: %d" % (index, story_id)
+        if (not story):
+            logging.error('Encountered error, skipping story')
+            continue
 
         # add to Top 100 collection
         try:
@@ -40,9 +50,13 @@ def get_top_100(api, collection, logging):
                 safe=True
             )
             #print index+1
-        except pymongo.errors.DuplicateKeyError, e:
+        except:
             logging.error('Encountered error, skipping story')
+            e = sys.exc_info()[0]
+            logging.error("Exception: %s" % e)
+            continue
 
+    return True
 
 def update_top_100(collection, collection_refresh, logging):
     #clear out current top 100
@@ -79,7 +93,7 @@ hn = firebase.FirebaseApplication('https://hacker-news.firebaseio.com/v0/', None
 
 while True:
     logging.info('Starting top 100 download at %s' % datetime.now())
-    get_top_100(hn, db_top_100_refresh, logging)
+    error = get_top_100(hn, db_top_100_refresh, logging)
     logging.info('Starting database update at %s' % datetime.now())
     update_top_100(db_top_100, db_top_100_refresh, logging)
     logging.info('Completed top 100 update at %s' % datetime.now())
