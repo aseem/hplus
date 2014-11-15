@@ -15,6 +15,10 @@
 		908A05AE1A0439E8002F4F1B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 908A05AD1A0439E8002F4F1B /* Images.xcassets */; };
 		908A05B11A0439E8002F4F1B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 908A05AF1A0439E8002F4F1B /* LaunchScreen.xib */; };
 		908A05BD1A0439E8002F4F1B /* hplusTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 908A05BC1A0439E8002F4F1B /* hplusTests.m */; };
+		90EFC2B91A16C476002D8571 /* HPStory.m in Sources */ = {isa = PBXBuildFile; fileRef = 90EFC2B81A16C476002D8571 /* HPStory.m */; };
+		90EFC2BD1A16C598002D8571 /* HPServiceCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 90EFC2BC1A16C598002D8571 /* HPServiceCommunicator.m */; };
+		90EFC2C01A16C6D8002D8571 /* HPServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 90EFC2BF1A16C6D8002D8571 /* HPServiceManager.m */; };
+		90EFC2C41A16C97E002D8571 /* HPStoryBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 90EFC2C31A16C97E002D8571 /* HPStoryBuilder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +46,16 @@
 		908A05B61A0439E8002F4F1B /* hplusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hplusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		908A05BB1A0439E8002F4F1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		908A05BC1A0439E8002F4F1B /* hplusTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = hplusTests.m; sourceTree = "<group>"; };
+		90EFC2B71A16C476002D8571 /* HPStory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPStory.h; sourceTree = "<group>"; };
+		90EFC2B81A16C476002D8571 /* HPStory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPStory.m; sourceTree = "<group>"; };
+		90EFC2BA1A16C555002D8571 /* HPServiceCommunicatorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPServiceCommunicatorDelegate.h; sourceTree = "<group>"; };
+		90EFC2BB1A16C598002D8571 /* HPServiceCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPServiceCommunicator.h; sourceTree = "<group>"; };
+		90EFC2BC1A16C598002D8571 /* HPServiceCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPServiceCommunicator.m; sourceTree = "<group>"; };
+		90EFC2BE1A16C6D8002D8571 /* HPServiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPServiceManager.h; sourceTree = "<group>"; };
+		90EFC2BF1A16C6D8002D8571 /* HPServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPServiceManager.m; sourceTree = "<group>"; };
+		90EFC2C21A16C97E002D8571 /* HPStoryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPStoryBuilder.h; sourceTree = "<group>"; };
+		90EFC2C31A16C97E002D8571 /* HPStoryBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPStoryBuilder.m; sourceTree = "<group>"; };
+		90EFC2C51A16D07A002D8571 /* HPServiceManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPServiceManagerDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +97,8 @@
 		908A059C1A0439E8002F4F1B /* hplus */ = {
 			isa = PBXGroup;
 			children = (
+				90EFC2C11A16C95B002D8571 /* Model */,
+				90EFC2B61A16C3E9002D8571 /* Service */,
 				908A05A11A0439E8002F4F1B /* AppDelegate.h */,
 				908A05A21A0439E8002F4F1B /* AppDelegate.m */,
 				908A05A71A0439E8002F4F1B /* ViewController.h */,
@@ -120,6 +136,30 @@
 				908A05BB1A0439E8002F4F1B /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		90EFC2B61A16C3E9002D8571 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				90EFC2BA1A16C555002D8571 /* HPServiceCommunicatorDelegate.h */,
+				90EFC2BB1A16C598002D8571 /* HPServiceCommunicator.h */,
+				90EFC2BC1A16C598002D8571 /* HPServiceCommunicator.m */,
+				90EFC2C51A16D07A002D8571 /* HPServiceManagerDelegate.h */,
+				90EFC2BE1A16C6D8002D8571 /* HPServiceManager.h */,
+				90EFC2BF1A16C6D8002D8571 /* HPServiceManager.m */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
+		90EFC2C11A16C95B002D8571 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				90EFC2B71A16C476002D8571 /* HPStory.h */,
+				90EFC2B81A16C476002D8571 /* HPStory.m */,
+				90EFC2C21A16C97E002D8571 /* HPStoryBuilder.h */,
+				90EFC2C31A16C97E002D8571 /* HPStoryBuilder.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,8 +264,12 @@
 			files = (
 				908A05A31A0439E8002F4F1B /* AppDelegate.m in Sources */,
 				908A05A61A0439E8002F4F1B /* hplus.xcdatamodeld in Sources */,
+				90EFC2BD1A16C598002D8571 /* HPServiceCommunicator.m in Sources */,
+				90EFC2C41A16C97E002D8571 /* HPStoryBuilder.m in Sources */,
 				908A05A91A0439E8002F4F1B /* ViewController.m in Sources */,
 				908A05A01A0439E8002F4F1B /* main.m in Sources */,
+				90EFC2B91A16C476002D8571 /* HPStory.m in Sources */,
+				90EFC2C01A16C6D8002D8571 /* HPServiceManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,6 +460,7 @@
 				908A05C21A0439E8002F4F1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		908A05C31A0439E8002F4F1B /* Build configuration list for PBXNativeTarget "hplusTests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +469,7 @@
 				908A05C51A0439E8002F4F1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
