@@ -76,6 +76,39 @@ def enroll_app():
     result['device-type'] = request.get_json().get('DeviceType')
     result['platform'] = request.get_json().get('Platform')
     result['OsVersion'] = request.get_json().get('OsVersion')
+    result['PolicyUpdated'] = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
+    policies = [
+    {
+        "Name":"mam.access.require-pin",
+        "ValueType":"boolean",
+        "Value":"True",
+        "Default":"True"
+    },
+    {
+        "Name":"mam.access.max-unlock-attempts",
+        "ValueType":"integer",
+        "Value":"8",
+        "Default":"4",
+        "LowerLimit":1,
+        "UpperLimit":12
+    },
+    {
+        "Name":"mam.access.grace-timeout",
+        "ValueType":"integer",
+        "Value":"5",
+        "Default":"15",
+        "LowerLimit":1,
+        "UpperLimit":720
+    },
+    {
+        "Name":"mam.dp.require-data-encryption",
+        "ValueType":"boolean",
+        "Value":"True",
+        "Default":"False"
+     }
+    ]
+
+    result['Policies'] = policies
 
     return json_util.dumps(result, default=json_util.default), 201
 
