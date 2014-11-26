@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, redirect, url_for, flash
+from flask import Flask, render_template, session, redirect, url_for, flash, request
 from flask.ext.script import Manager
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.moment import Moment
@@ -63,6 +63,23 @@ def get_hn():
     stories = mongo.db.top_100.find().sort('rank', 1)
     return json_util.dumps(stories, default=json_util.default)
     
+@app.route('/api/ApplicationInstances', methods=['POST'])
+def enroll_app():
+    result = {}
+    print "Made it!"
+    result['Id'] = '88f57c04-f197-4bb8-9055-f5486f4dd00a'
+    result['OrgId'] = 'aseem.onmicrosoft.com'
+    result['Version'] = request.get_json().get('Version')
+    result['Publisher'] = request.get_json().get('Publisher')
+    result['Category'] = request.get_json().get('Category')
+    result['DeviceId'] = request.get_json().get('DeviceId')
+    result['device-type'] = request.get_json().get('DeviceType')
+    result['platform'] = request.get_json().get('Platform')
+    result['OsVersion'] = request.get_json().get('OsVersion')
+
+    return json_util.dumps(result, default=json_util.default), 201
+
+
 
 @app.route('/user/<name>')
 def user(name):
