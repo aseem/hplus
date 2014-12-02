@@ -97,15 +97,13 @@
 		908A059C1A0439E8002F4F1B /* hplus */ = {
 			isa = PBXGroup;
 			children = (
-				90EFC2C11A16C95B002D8571 /* Model */,
+				90EFC2C71A16D6A4002D8571 /* Views */,
+				90EFC2C61A16D698002D8571 /* Controllers */,
+				90EFC2C11A16C95B002D8571 /* Models */,
 				90EFC2B61A16C3E9002D8571 /* Service */,
 				908A05A11A0439E8002F4F1B /* AppDelegate.h */,
 				908A05A21A0439E8002F4F1B /* AppDelegate.m */,
-				908A05A71A0439E8002F4F1B /* ViewController.h */,
-				908A05A81A0439E8002F4F1B /* ViewController.m */,
-				908A05AA1A0439E8002F4F1B /* Main.storyboard */,
 				908A05AD1A0439E8002F4F1B /* Images.xcassets */,
-				908A05AF1A0439E8002F4F1B /* LaunchScreen.xib */,
 				908A05A41A0439E8002F4F1B /* hplus.xcdatamodeld */,
 				908A059D1A0439E8002F4F1B /* Supporting Files */,
 			);
@@ -151,7 +149,7 @@
 			name = Service;
 			sourceTree = "<group>";
 		};
-		90EFC2C11A16C95B002D8571 /* Model */ = {
+		90EFC2C11A16C95B002D8571 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				90EFC2B71A16C476002D8571 /* HPStory.h */,
@@ -159,7 +157,25 @@
 				90EFC2C21A16C97E002D8571 /* HPStoryBuilder.h */,
 				90EFC2C31A16C97E002D8571 /* HPStoryBuilder.m */,
 			);
-			name = Model;
+			name = Models;
+			sourceTree = "<group>";
+		};
+		90EFC2C61A16D698002D8571 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				908A05A71A0439E8002F4F1B /* ViewController.h */,
+				908A05A81A0439E8002F4F1B /* ViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		90EFC2C71A16D6A4002D8571 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				908A05AF1A0439E8002F4F1B /* LaunchScreen.xib */,
+				908A05AA1A0439E8002F4F1B /* Main.storyboard */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

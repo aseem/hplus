@@ -66,46 +66,96 @@ def get_hn():
 @app.route('/api/ApplicationInstances', methods=['POST'])
 def enroll_app():
     result = {}
-    print "Made it!"
     result['Id'] = '88f57c04-f197-4bb8-9055-f5486f4dd00a'
-    result['OrgId'] = 'aseem.onmicrosoft.com'
+    result['OrgId'] = 'aseemoutlook.onmicrosoft.com'
     result['Version'] = request.get_json().get('Version')
     result['Publisher'] = request.get_json().get('Publisher')
     result['Category'] = request.get_json().get('Category')
     result['DeviceId'] = request.get_json().get('DeviceId')
-    result['device-type'] = request.get_json().get('DeviceType')
-    result['platform'] = request.get_json().get('Platform')
+    result['Device-Type'] = request.get_json().get('DeviceType')
+    result['Platform'] = request.get_json().get('Platform')
     result['OsVersion'] = request.get_json().get('OsVersion')
     result['PolicyUpdated'] = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
+    result['Policy-Version'] = "1.0"
     policies = [
     {
-        "Name":"mam.access.require-pin",
+        "Name":"mam.access-recheck-offline-timeout",
+        "ValueType":"integer",
+        "Value":"0",
+        "Default":"720",
+        "LowerLimit":0,
+        "UpperLimit":720
+    },
+    {
+        "Name":"mam.access-recheck-online-timeout",
+        "ValueType":"integer",
+        "Value":"0",
+        "Default":"720",
+        "LowerLimit":0,
+        "UpperLimit":720
+    },
+    {
+        "Name":"mam.app-sharing-from-level",
+        "ValueType":"integer",
+        "Value":"1",
+        "Default":"1",
+        "LowerLimit":0,
+        "UpperLimit":2
+    },
+    {
+        "Name":"mam.app-sharing-to-level",
+        "ValueType":"integer",
+        "Value":"1",
+        "Default":"1",
+        "LowerLimit":0,
+        "UpperLimit":2
+    },
+    {
+        "Name":"mam.clipboard-sharing-level",
+        "ValueType":"integer",
+        "Value":"2",
+        "Default":"2",
+        "LowerLimit":0,
+        "UpperLimit":3
+    },
+    {
+        "Name":"mam.data-backup-disabled",
         "ValueType":"boolean",
         "Value":"True",
         "Default":"True"
     },
     {
-        "Name":"mam.access.max-unlock-attempts",
-        "ValueType":"integer",
-        "Value":"8",
-        "Default":"4",
-        "LowerLimit":1,
-        "UpperLimit":12
-    },
-    {
-        "Name":"mam.access.grace-timeout",
-        "ValueType":"integer",
-        "Value":"5",
-        "Default":"15",
-        "LowerLimit":1,
-        "UpperLimit":720
-    },
-    {
-        "Name":"mam.dp.require-data-encryption",
+        "Name":"mam.device-compliance-enabled",
         "ValueType":"boolean",
         "Value":"True",
-        "Default":"False"
-     }
+        "Default":"True"
+    },
+    {
+        "Name":"mam.file-encryption-level",
+        "ValueType":"integer",
+        "Value":"1",
+        "Default":"1",
+        "LowerLimit":0,
+        "UpperLimit":3
+    },
+    {
+        "Name":"mam.file-sharing-save-as-disabled",
+        "ValueType":"boolean",
+        "Value":"True",
+        "Default":"True"
+    },
+    {
+        "Name":"mam.managed-browser-required",
+        "ValueType":"boolean",
+        "Value":"True",
+        "Default":"True"
+    },
+    {
+        "Name":"mam.pin-enabled",
+        "ValueType":"boolean",
+        "Value":"True",
+        "Default":"True"
+    }
     ]
 
     result['Policies'] = policies
