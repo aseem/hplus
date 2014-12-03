@@ -155,6 +155,14 @@ def enroll_app():
         "ValueType":"boolean",
         "Value":"True",
         "Default":"True"
+    },
+    {
+        "Name":"mam.pin-num-retries",
+        "ValueType":"integer",
+        "Value":"5",
+        "Default":"5",
+        "LowerLimit":1,
+        "UpperLimit":10
     }
     ]
 
