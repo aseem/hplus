@@ -17,7 +17,7 @@ app.config['MONGO_DBNAME'] = 'hacker_news_test'
 manager = Manager(app)
 bootstrap = Bootstrap(app)
 moment = Moment(app)
-mongo = PyMongo(app)
+#mongo = PyMongo(app)
 
 # Forms
 class NameForm(Form):
@@ -63,6 +63,123 @@ def get_hn():
     stories = mongo.db.top_100.find().sort('rank', 1)
     return json_util.dumps(stories, default=json_util.default)
     
+
+@app.route('/StatelessApplicationManagementService/ApplicationInstances', methods=['POST'])
+def enroll_mam():
+    result = {}
+
+    print request.get_json()
+
+    result['Key'] = '651a7e38-e85b-4f58-ad12-918adeb41750'
+    result['AppId'] = request.get_json().get('AppId')
+    result['AppVersion'] = request.get_json().get('AppVersion')
+    result['SdkVersion'] = request.get_json().get('SdkVersion')
+    result['DeviceId'] = request.get_json().get('DeviceId')
+    result['DeviceType'] = request.get_json().get('DeviceType')
+    result['DeviceHealth'] = request.get_json().get('DeviceHealth')
+    result['Os'] = request.get_json().get('Os')
+    result['OsVersion'] = request.get_json().get('OsVersion')
+    result['EnrollmentTime'] = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
+    result['Action'] = 'http://54.243.48.46/StatelessApplicationManagementService/ApplicationInstances(\'651a7e38-e85b-4f58-ad12-918adeb41750\')/Action'
+
+    return json_util.dumps(result, default=json_util.default), 201
+
+@app.route('/StatelessApplicationManagementService/ApplicationInstances(\'651a7e38-e85b-4f58-ad12-918adeb41750\')/Action', methods=['GET'])
+def checkin_mam():
+    result = {}
+    result['Key'] = '651a7e38-e85b-4f58-ad12-918adeb41750'
+    result['StatusCode'] = 5
+
+    # Action Version Dict
+    action_version = {}
+    action_version['Major'] = 1
+    action_version['Minor'] = 11
+    result['action_version'] = action_version
+
+    # Configuration Dict
+    config = [
+    {
+        "Name":"CheckInOnLaunch",
+        "Value":"true",
+    },
+    {
+        "Name":"CheckInInterval",
+        "Value":"1",
+    }]
+    result['Configuration'] = config
+
+    # policy dict
+    policy = [
+        {
+            "Name": "PINEnabled",
+            "Value": "True"
+        },
+        {
+            "Name": "pinnumRetry",
+            "Value": "5"
+        },
+        {
+            "Name": "BlockScreenCapture",
+            "Value": "True"
+        },
+        {
+            "Name": "FileSharingSaveAsDisabled",
+            "Value": "True"
+        },
+        {
+            "Name": "DataBackupDisabled",
+            "Value": "True"
+        },
+        {
+            "Name": "DeviceComplianceEnabled",
+            "Value": "False"
+        },
+        {
+            "Name": "RequireFileEncryption",
+            "Value": "True"
+        },
+        {
+            "Name": "AuthenticationEnabled",
+            "Value": "False"
+        },
+        {
+            "Name": "AccessRecheckOnlineTimeout",
+            "Value": "30"
+        },
+        {
+            "Name": "AccessRecheckOfflineTimeout",
+            "Value": "720"
+        },
+        {
+            "Name": "AppSharingToLevel",
+            "Value": "1"
+        },
+        {
+            "Name": "AppSharingFromLevel",
+            "Value": "2"
+        },
+        {
+            "Name": "ClipboardSharingLevel",
+            "Value": "2"
+        },
+        {
+            "Name": "FileEncryptionLevel",
+            "Value": "3"
+        },
+        {
+            "Name": "MinOsVersion",
+            "Value": "7.0"
+        },
+        {
+            "Name": "MinAppVersion",
+            "Value": "1.10"
+        }
+    ]
+    result['Policy'] = policy
+
+    return json_util.dumps(result, default=json_util.default), 200
+
+
 @app.route('/api/ApplicationInstances', methods=['POST'])
 def enroll_app():
     result = {}
@@ -169,7 +286,6 @@ def enroll_app():
     result['Policies'] = policies
 
     return json_util.dumps(result, default=json_util.default), 201
-
 
 
 @app.route('/user/<name>')
