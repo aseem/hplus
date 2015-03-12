@@ -108,6 +108,8 @@ def checkin_mam():
     }]
     result['Configuration'] = config
 
+    result['Commands'] = []
+
     # policy dict
     policy = [
         {
