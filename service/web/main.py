@@ -94,7 +94,7 @@ def checkin_mam():
     action_version = {}
     action_version['Major'] = 1
     action_version['Minor'] = 11
-    result['ActionVersion'] = action_version
+    result['PolicyVersion'] = action_version
 
     # Configuration Dict
     config = [
