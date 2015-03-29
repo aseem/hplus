@@ -82,7 +82,7 @@ def enroll_mam():
     result['EnrollmentTime'] = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
     result['Action'] = 'http://54.243.48.46/StatelessApplicationManagementService/ApplicationInstances(guid\'651a7e38-e85b-4f58-ad12-918adeb41750\')/Action'
 
-    return json_util.dumps(result, default=json_util.default), 201
+    return json_util.dumps(result, default=json_util.default), 200
 
 @app.route('/StatelessApplicationManagementService/ApplicationInstances(guid\'651a7e38-e85b-4f58-ad12-918adeb41750\')/Action', methods=['GET'])
 def checkin_mam():
@@ -330,7 +330,7 @@ def enroll_app():
 
     result['Policies'] = policies
 
-    return json_util.dumps(result, default=json_util.default), 201
+    return json_util.dumps(result, default=json_util.default), 200
 
 
 @app.route('/user/<name>')
