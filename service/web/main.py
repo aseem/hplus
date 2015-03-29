@@ -182,6 +182,49 @@ def checkin_mam():
     return json_util.dumps(result, default=json_util.default), 200
 
 
+@app.route('/NoPolicy/StatelessApplicationManagementService/ApplicationInstances(guid\'651a7e38-e85b-4f58-ad12-918adeb41750\')/Action', methods=['GET'])
+def checkin_no_policy():
+    result = {}
+    result['Key'] = '651a7e38-e85b-4f58-ad12-918adeb41750'
+    result['StatusCode'] = 5
+
+    # Action Version Dict
+    action_version = {}
+    action_version['Major'] = 1
+    action_version['Minor'] = 11
+    result['PolicyVersion'] = action_version
+
+    # Commands Dict
+    commands = [
+        {
+            "Name":"NoPolicy",
+            "Value":"foo"
+        }
+    ]
+    result['Commands'] = commands
+
+
+
+    # Configuration Dict
+    config = [
+    {
+        "Name":"CheckInOnLaunch",
+        "Value":"true",
+    },
+    {
+        "Name":"CheckInInterval",
+        "Value":"1",
+    }]
+    result['Configuration'] = config
+
+
+    # policy dict
+    policy = []
+    result['Policy'] = policy
+
+    return json_util.dumps(result, default=json_util.default), 200
+
+
 @app.route('/api/ApplicationInstances', methods=['POST'])
 def enroll_app():
     result = {}
